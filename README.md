@@ -1,1 +1,1 @@
-https://kamolakhan.github.io/tic-tac-toe/settings/pages
+https://kamolakhan.github.io/tic-tac-toe/
