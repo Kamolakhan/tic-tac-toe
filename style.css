@@ -19,7 +19,7 @@ body {
 
 h1 {
   color: #eef955;
-  margin-bottom: 50px;
+  margin-bottom: 45px;
 }
 
 .settings {
@@ -57,7 +57,7 @@ h1 {
   width: 350px;
   height: 350px;
   margin: 20px auto;
-  border: 2px solid #f8f5f5;
+  border: 2px solid #4ec3dd;
 }
 
 .cell {
