@@ -58,14 +58,7 @@ const GameController = (() => {
     DisplayController.updateMessage(
       `${getCurrentPlayer().getName()}  ${getCurrentPlayer().getMark()}  turn`
     );
-    console.log("Game started. Board reset.");
-    console.log(
-      `Player 1: ${playersList[0].getName()} (${playersList[0].getMark()})`
-    );
-    console.log(
-      `Player 2: ${playersList[1].getName()} (${playersList[1].getMark()})`
-    );
-    console.log(`Current turn: ${playersList[currentPlayerIdx].getName()}`);
+  
   };
 
   const getCurrentPlayer = () => playersList[currentPlayerIdx];
@@ -94,13 +87,9 @@ const GameController = (() => {
       gameIsOver ||
       !Gameboard.placeMark(cellIndex, getCurrentPlayer().getMark())
     ) {
-      console.log("Invalid move or game over.");
       return false;
     }
 
-    console.log(
-      `${getCurrentPlayer().getName()} placed ${getCurrentPlayer().getMark()} at ${cellIndex}`
-    );
     DisplayController.renderBoard();
 
     if (checkWinCondition(getCurrentPlayer().getMark())) {
@@ -108,14 +97,12 @@ const GameController = (() => {
       DisplayController.updateMessage(
         `Congratulations 🎉🎉🎉 ${getCurrentPlayer().getName()}!`
       );
-      console.log(`Game Over. Winner: ${getCurrentPlayer().getName()}`);
       return true;
     }
 
     if (checkDrawCondition()) {
       gameIsOver = true;
       DisplayController.updateMessage("It's a draw!");
-      console.log("Game Over. It's a draw.");
       return true;
     }
 
@@ -123,33 +110,16 @@ const GameController = (() => {
     DisplayController.updateMessage(
       `${getCurrentPlayer().getName()}  ${getCurrentPlayer().getMark()}  turn`
     );
-    console.log(`Next turn: ${getCurrentPlayer().getName()}`);
     return true;
   };
 
   const isGameOver = () => gameIsOver;
-
-  const printBoardToConsole = () => {
-    const currentBoard = Gameboard.getBoard();
-    console.log(
-      currentBoard[0] + "|" + currentBoard[1] + "|" + currentBoard[2]
-    );
-    console.log("-----");
-    console.log(
-      currentBoard[3] + "|" + currentBoard[4] + "|" + currentBoard[5]
-    );
-    console.log("-----");
-    console.log(
-      currentBoard[6] + "|" + currentBoard[7] + "|" + currentBoard[8]
-    );
-  };
 
   return {
     startGame,
     playTurn,
     getCurrentPlayer,
     isGameOver,
-    printBoardToConsole,
   };
 })();
 
@@ -169,7 +139,6 @@ const DisplayController = (() => {
 
     const cellIndex = parseInt(event.target.dataset.index);
     if (Gameboard.getBoard()[cellIndex] !== "") {
-      console.log("Cell already taken.");
       return;
     }
     GameController.playTurn(cellIndex);
@@ -188,7 +157,7 @@ const DisplayController = (() => {
       cell.addEventListener("click", cellClickHandler);
       gameboardDiv.appendChild(cell);
     });
-    console.log("Board rendered to DOM.");
+
   };
 
   const updateMessage = (text) => {
@@ -213,7 +182,6 @@ const DisplayController = (() => {
 
   gameDiv.classList.add("hidden");
 
-  console.log("DisplayController initialized.");
 
   return { renderBoard, updateMessage };
 })();
